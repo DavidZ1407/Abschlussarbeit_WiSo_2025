@@ -6,87 +6,78 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
     <!-- Aufgabe: Abschlussarbeit_WiSo_2025 -->
     <!-- Name: David Zahn -->
     <!-- Martikelnummer: 275010 -->
     <!-- Datum: .02.2025 -->
-
-
 
     <title>Feuerwerk</title>
     <script src="./Vector.js"></script>
     <script src="./Particle.js"></script>
     <script src="./Firework.js"></script>
     <script src="./main.js"></script>
+    <script src="Background.js"></script>
     <link rel="stylesheet" href="./index.css">
-
 </head>
 
 <body>
-    <canvas height="625" width="1000"></canvas>
-
-    <div id="container">
-        <!-- Alle Slider -->
+    <div id="window-container">
+        <canvas id="firework-canvas" height="625" width="1000"></canvas>
+      </div>
+    
+      <div id="container">
         <div id="controls">
-            <div>
-                <input type="text" name="name" id="name" placeholder="Mein Feuerwerk">
-            </div>
-            <div>
-                <label for="red">Rot</label>
-                <input type="range" name="red" id="red" min="0" max="255" value="255" step="1">
-            </div>
-            <div>
-                <label for="green">Grün</label>
-                <input type="range" name="green" id="green" min="0" max="255" value="0" step="1">
-            </div>
-            <div>
-                <label for="blue">Blau</label>
-                <input type="range" name="blue" id="blue" min="0" max="255" value="0" step="1">
-            </div>
-            <div id="color">
-                Ausgewählte Farbe
-            </div>
-            <div>
-                <label for="numberOfParticles">Anzahl der Partikel</label>
-                <input type="range" name="numberOfParticles" id="numberOfParticles" min="0" max="200" value="50"
-                    step="1">
-            </div>
-            <div>
-                <label for="speed">Geschwindigkeit</label>
-                <input type="range" name="speed" id="speed" min="1" max="15" value="5" step="1">
-            </div>
-            <div>
-                <label for="size">Größe der Partikel</label>
-                <input type="range" name="size" id="size" min="1" max="10" value="1" step="1">
-            </div>
-            <div>
-                <label for="width">Ausbreitung der Partikel</label>
-                <input type="range" name="width" id="width" min="1" max="25" value="10" step="1">
-            </div>
+          <div>
+            <input type="text" name="name" id="name" placeholder="Mein Feuerwerk">
+          </div>
+          <div>
+            <label for="red">Rot</label>
+            <input type="range" name="red" id="red" min="0" max="255" value="255" step="1">
+          </div>
+          <div>
+            <label for="green">Grün</label>
+            <input type="range" name="green" id="green" min="0" max="255" value="0" step="1">
+          </div>
+          <div>
+            <label for="blue">Blau</label>
+            <input type="range" name="blue" id="blue" min="0" max="255" value="0" step="1">
+          </div>
+          <div id="color">
+            Ausgewählte Farbe
+          </div>
+          <div>
+            <label for="numberOfParticles">Anzahl der Partikel</label>
+            <input type="range" name="numberOfParticles" id="numberOfParticles" min="0" max="200" value="50" step="1">
+          </div>
+          <div>
+            <label for="speed">Geschwindigkeit</label>
+            <input type="range" name="speed" id="speed" min="1" max="15" value="5" step="1">
+          </div>
+          <div>
+            <label for="size">Größe der Partikel</label>
+            <input type="range" name="size" id="size" min="1" max="10" value="1" step="1">
+          </div>
+          <div>
+            <label for="width">Ausbreitung der Partikel</label>
+            <input type="range" name="width" id="width" min="1" max="25" value="10" step="1">
+          </div>
         </div>
-
-
+    
         <div id="savedFireworks">
-            <button id="save">Feuerwerk Speichern</button>
-
-            <h5>Feuerwerke im Speicher</h5>
-            <div id="available">
-
-                <div style="display: none;">
-                    <span class="fireworkName"></span>
-                    <span>|</span>
-                    <span class="load">Laden</span>
-                    <span>|</span>
-                    <span class="delete">Löschen</span>
-                </div>
-
+          <button id="save">Feuerwerk Speichern</button>
+    
+          <h5>Feuerwerke im Speicher</h5>
+          <div id="available">
+            <div style="display: none;">
+              <span class="fireworkName"></span>
+              <span>|</span>
+              <span class="load">Laden</span>
+              <span>|</span>
+              <span class="delete">Löschen</span>
             </div>
+          </div>
         </div>
-    </div>
-
-
-
-</body>
+      </div>
+    </body>
 
 </html>

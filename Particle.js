@@ -3,15 +3,17 @@ var Feuerwerk;
 (function (Feuerwerk) {
     class Particle {
         alive;
-        lifetime = 20;
+        lifetime = 40; // Lebenszeit verlängert für schnelle Bewegung
         position;
         velocity;
+        speed; // Separater Geschwindigkeitsfaktor
         crc2;
         color;
         size;
-        constructor(config, position, startVelocity) {
+        constructor(config, position, startVelocity, speed = 1) {
             this.position = position;
             this.velocity = startVelocity;
+            this.speed = speed; // Geschwindigkeitsfaktor initialisieren
             this.color = config.color;
             this.size = config.size;
             this.alive = true;
@@ -32,9 +34,20 @@ var Feuerwerk;
                 throw new Error("Canvas element not found.");
             }
         }
+        setSpeed(newSpeed) {
+            this.speed = newSpeed;
+        }
+        setVelocity(newVelocity) {
+            this.velocity = newVelocity;
+        }
+        applyVelocityChange(change) {
+            this.velocity.add(change);
+        }
         update() {
-            this.velocity.y += 0.1; // Schwerkraft-Effekt
-            this.position.add(this.velocity);
+            const gravity = new Feuerwerk.Vector(0, 0.2); // Verstärkte Gravitation
+            this.velocity.add(gravity); // Gravitation anwenden
+            const scaledVelocity = new Feuerwerk.Vector(this.velocity.x * this.speed, this.velocity.y * this.speed);
+            this.position.add(scaledVelocity); // Position mit separater Geschwindigkeit aktualisieren
             this.lifetime -= 1;
             if (this.lifetime <= 0)
                 this.alive = false;

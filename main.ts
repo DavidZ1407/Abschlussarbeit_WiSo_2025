@@ -12,6 +12,8 @@ namespace Feuerwerk {
     let size: number = 2;
     let width: number = 10;
 
+    let background: Background; // Neue Instanz der Background-Klasse
+
     function updateColor(): void {
         const red = (document.getElementById("red") as HTMLInputElement).value;
         const green = (document.getElementById("green") as HTMLInputElement).value;
@@ -25,6 +27,10 @@ namespace Feuerwerk {
         rect = canvas.getBoundingClientRect();
         canvas.addEventListener("click", handleClick);
         crc2 = canvas.getContext("2d") as CanvasRenderingContext2D;
+
+        // Instanziieren der Background-Klasse
+        background = new Background(crc2);
+
         setInterval(update, 20);
         loadFireworkNames();
 
@@ -56,17 +62,8 @@ namespace Feuerwerk {
         saveFirework(fireworkConfig);
     }
 
-    function drawBackground(): void {
-        let gradient = crc2.createLinearGradient(0, 0, 0, crc2.canvas.height);
-        gradient.addColorStop(0, "#05050555");
-        gradient.addColorStop(0.62, "#00002255");
-        gradient.addColorStop(1, "#00003355");
-        crc2.fillStyle = gradient;
-        crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
-    }
-
     function update(): void {
-        drawBackground();
+        background.draw(); // Den Hintergrund zeichnen
         fireworks.forEach(firework => {
             firework.draw();
             firework.update();

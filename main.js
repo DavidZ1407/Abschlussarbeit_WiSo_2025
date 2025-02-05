@@ -11,6 +11,7 @@ var Feuerwerk;
     let speed = 5;
     let size = 2;
     let width = 10;
+    let background; // Neue Instanz der Background-Klasse
     function updateColor() {
         const red = document.getElementById("red").value;
         const green = document.getElementById("green").value;
@@ -23,6 +24,8 @@ var Feuerwerk;
         rect = canvas.getBoundingClientRect();
         canvas.addEventListener("click", handleClick);
         crc2 = canvas.getContext("2d");
+        // Instanziieren der Background-Klasse
+        background = new Feuerwerk.Background(crc2);
         setInterval(update, 20);
         loadFireworkNames();
         document.getElementById("red").addEventListener("input", updateColor);
@@ -49,16 +52,8 @@ var Feuerwerk;
         fireworks.push(new Feuerwerk.Firework(fireworkConfig, particleConfig));
         saveFirework(fireworkConfig);
     }
-    function drawBackground() {
-        let gradient = crc2.createLinearGradient(0, 0, 0, crc2.canvas.height);
-        gradient.addColorStop(0, "#05050555");
-        gradient.addColorStop(0.62, "#00002255");
-        gradient.addColorStop(1, "#00003355");
-        crc2.fillStyle = gradient;
-        crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
-    }
     function update() {
-        drawBackground();
+        background.draw(); // Den Hintergrund zeichnen
         fireworks.forEach(firework => {
             firework.draw();
             firework.update();

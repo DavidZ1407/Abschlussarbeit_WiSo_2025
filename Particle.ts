@@ -71,4 +71,32 @@ namespace Feuerwerk {
             this.crc2.stroke();
         }
     }
+
+
+    // export async function saveRocket(config: ParticleConfig): Promise<void> {
+    //     let response = await fetch("server.php", {
+    //         method: "POST",
+    //         headers: { "Content-Type": "application/json" },
+    //         body: JSON.stringify({ command: "save", config })
+    //     });
+    //     let result = await response.json();
+    //     console.log("Server response:", result);
+    // }
+
+    // export async function loadRockets(): Promise<ParticleConfig[]> {
+    //     let response = await fetch("server.php?command=load");
+    //     let rockets = await response.json();
+    //     console.log("Loaded rockets:", rockets);
+    //     return rockets;
+    // }
+
+
+    // async function testLoadRockets() {
+    //     let rockets = await Feuerwerk.loadRockets();
+    //     console.log("Geladene Raketen:", rockets);
+    // }
+    // testLoadRockets();
 }
+
+
+

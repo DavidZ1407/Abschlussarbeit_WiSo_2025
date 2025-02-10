@@ -24,7 +24,6 @@ var Feuerwerk;
         rect = canvas.getBoundingClientRect();
         canvas.addEventListener("click", handleClick);
         crc2 = canvas.getContext("2d");
-        // Instanziieren der Background-Klasse
         background = new Feuerwerk.Background(crc2);
         setInterval(update, 20);
         loadFireworkNames();
@@ -37,6 +36,8 @@ var Feuerwerk;
         document.getElementById("width").addEventListener("input", (e) => width = parseInt(e.target.value));
     }
     function handleClick(e) {
+        const explosionSound = new Audio("Sound/Firework.wav");
+        explosionSound.play();
         let fireworkConfig = {
             color: color,
             numberOfParticles: numberOfParticles,
@@ -53,7 +54,7 @@ var Feuerwerk;
         saveFirework(fireworkConfig);
     }
     function update() {
-        background.draw(); // Den Hintergrund zeichnen
+        background.draw();
         fireworks.forEach(firework => {
             firework.draw();
             firework.update();
@@ -68,6 +69,9 @@ var Feuerwerk;
     function loadFireworkNames() {
         let savedFireworks = JSON.parse(localStorage.getItem("fireworks") || "[]");
         console.log("Loaded Firework Configurations:", savedFireworks);
+        savedFireworks.forEach((config) => {
+            console.log("Firework Name:", config);
+        });
     }
 })(Feuerwerk || (Feuerwerk = {}));
 //# sourceMappingURL=main.js.map

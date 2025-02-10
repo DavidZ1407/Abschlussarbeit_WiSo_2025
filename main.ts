@@ -28,7 +28,6 @@ namespace Feuerwerk {
         canvas.addEventListener("click", handleClick);
         crc2 = canvas.getContext("2d") as CanvasRenderingContext2D;
 
-        // Instanziieren der Background-Klasse
         background = new Background(crc2);
 
         setInterval(update, 20);
@@ -44,6 +43,9 @@ namespace Feuerwerk {
     }
 
     function handleClick(e: MouseEvent): void {
+        const explosionSound = new Audio("Sound/Firework.wav");
+        explosionSound.play();
+
         let fireworkConfig: FireworkConfig = {
             color: color,
             numberOfParticles: numberOfParticles,
@@ -63,7 +65,7 @@ namespace Feuerwerk {
     }
 
     function update(): void {
-        background.draw(); // Den Hintergrund zeichnen
+        background.draw();
         fireworks.forEach(firework => {
             firework.draw();
             firework.update();
@@ -71,14 +73,21 @@ namespace Feuerwerk {
     }
 
     function saveFirework(config: FireworkConfig): void {
-        let savedFireworks = JSON.parse(localStorage.getItem("fireworks") || "[]");
+        let savedFireworks = JSON.parse(localStorage.getItem("fireworks") || "[]") as FireworkConfig[];
         savedFireworks.push(config);
         localStorage.setItem("fireworks", JSON.stringify(savedFireworks));
         console.log("Firework saved:", config);
     }
 
     function loadFireworkNames(): void {
-        let savedFireworks = JSON.parse(localStorage.getItem("fireworks") || "[]");
+        let savedFireworks = JSON.parse(localStorage.getItem("fireworks") || "[]") as FireworkConfig[];
         console.log("Loaded Firework Configurations:", savedFireworks);
+
+        savedFireworks.forEach((config: FireworkConfig) => {
+            console.log("Firework Name:", config);
+        });
     }
+
+
+
 }
